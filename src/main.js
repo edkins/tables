@@ -1,5 +1,6 @@
 var http = require('http');
 var dispatcher = require('httpdispatcher');
+var apiTables = require('./api-tables');
 
 const port = 8080;
 
@@ -11,10 +12,7 @@ dispatcher.onGet("/", function(req,res) {
 	req.url = "/resources/index.html";
 	dispatcher.staticListener(req,res);
 });
-dispatcher.onGet("/page1", function(req, res) {
-	res.writeHead(200, {'Content-Type': 'text/plain'});
-	res.end('Page One');
-});	
+apiTables( dispatcher );
 dispatcher.setStatic( 'resources' );
 dispatcher.setStaticDirname( '' );
 
